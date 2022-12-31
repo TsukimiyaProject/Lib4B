@@ -1,0 +1,4 @@
+command:
+  restrict:
+    console: "%ERROR% This command must be executed in game."
+    player: "%ERROR% This command must be executed from a server console."
