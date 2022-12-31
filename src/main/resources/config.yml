@@ -2,3 +2,6 @@ command:
   restrict:
     console: "%ERROR% This command must be executed in game."
     player: "%ERROR% This command must be executed from a server console."
+  exception:
+    sub-registered: "%ERROR% SubCommand with same name / alias for %0 already exists in %1 command"
+    pl-cmd-not-found: "%ERROR% %0 command not found in %1 plugin."
