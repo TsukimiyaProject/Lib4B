@@ -1,3 +1,15 @@
+# sqlite or mysql
+db-type: "sqlite"
+sqlite:
+  file: "tsukimiya.db"
+mysql:
+  address: "localhost"
+  port: 3306
+  database: "example"
+  user: "root"
+  password: "password"
+
+# message
 command:
   restrict:
     console: "%ERROR% This command must be executed in game."
@@ -5,3 +17,6 @@ command:
   exception:
     sub-registered: "%ERROR% SubCommand with same name / alias for %0 already exists in %1 command"
     pl-cmd-not-found: "%ERROR% %0 command not found in %1 plugin."
+config:
+  not-found-key: "%ERROR% not found key '%0'"
+  invalid-value: "%ERROR% invalid value '%0' from key '%1'"

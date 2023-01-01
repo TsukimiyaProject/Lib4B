@@ -12,7 +12,6 @@ group = "org.example"
 version = "1.0-SNAPSHOT"
 
 val mcVersion = "1.19.3"
-val latest = "latest.release"
 
 repositories {
     mavenCentral()
@@ -22,6 +21,10 @@ repositories {
 dependencies {
     library(kotlin("stdlib"))
     compileOnly("io.papermc.paper:paper-api:${mcVersion}-R0.1-SNAPSHOT")
+    library("org.jetbrains.exposed:exposed-core:0.41.1")
+    library("org.jetbrains.exposed:exposed-jdbc:0.41.1")
+    library("org.xerial:sqlite-jdbc:3.40.0.0")
+    library("com.mysql:mysql-connector-j:8.0.31")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
