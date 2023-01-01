@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "org.example"
-version = "1.0"
+version = "1.0.0"
 
 val mcVersion = "1.19.3"
 
