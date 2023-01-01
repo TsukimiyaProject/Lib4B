@@ -1,2 +1,2 @@
-rootProject.name = "Lib4B"
+rootProject.name = "lib4b"
 
