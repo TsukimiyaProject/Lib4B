@@ -11,10 +11,10 @@ class MessageFormatter(private val config: FileConfiguration) {
     fun formatMessage(key: String, vararg replace: String): String {
         var message = config.getString(key) ?: return key
 
-        message = ChatColor.translateAlternateColorCodes(COLOR_PREFIX, message)
         MessagePrefix.values().forEach {
             message = message.replace(it.search, it.replace)
         }
+        message = ChatColor.translateAlternateColorCodes(COLOR_PREFIX, message)
         replace.forEachIndexed { index, s ->
             message = message.replace("%${index}", s)
         }
