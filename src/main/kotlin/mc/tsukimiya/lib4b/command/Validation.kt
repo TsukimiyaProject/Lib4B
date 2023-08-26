@@ -1,6 +1,12 @@
 package mc.tsukimiya.lib4b.command
 
 object Validation {
+    /**
+     * Intか
+     *
+     * @param str
+     * @return
+     */
     fun isInt(str: String): Boolean {
         return try {
             str.toInt()
@@ -10,15 +16,27 @@ object Validation {
         }
     }
 
+    /**
+     * 自然数か(ULongによるチェック)
+     *
+     * @param str
+     * @return
+     */
     fun isNaturalNumber(str: String): Boolean {
         return try {
-            val i = str.toInt()
-            i >= 0
+            val i = str.toULong()
+            i >= 0u
         } catch (e: NumberFormatException) {
             false
         }
     }
 
+    /**
+     * Doubleか
+     *
+     * @param str
+     * @return
+     */
     fun isDouble(str: String): Boolean {
         return try {
             str.toDouble()
@@ -28,6 +46,12 @@ object Validation {
         }
     }
 
+    /**
+     * 正の実数か
+     *
+     * @param str
+     * @return
+     */
     fun isPositiveNumber(str: String): Boolean {
         return try {
             val d = str.toDouble()
