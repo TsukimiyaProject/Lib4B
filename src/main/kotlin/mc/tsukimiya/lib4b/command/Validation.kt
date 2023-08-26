@@ -24,8 +24,8 @@ object Validation {
      */
     fun isNaturalNumber(str: String): Boolean {
         return try {
-            val i = str.toULong()
-            i >= 0u
+            str.toULong()
+            true
         } catch (e: NumberFormatException) {
             false
         }
