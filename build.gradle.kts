@@ -9,9 +9,9 @@ plugins {
 }
 
 group = "mc.tsukimiya"
-version = "1.1.2"
+version = "1.2.0"
 
-val mcVersion = "1.20.1"
+val mcVersion = "1.20.4"
 
 repositories {
     mavenCentral()
@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     library(kotlin("stdlib"))
+    library("org.jetbrains.exposed:exposed-core:0.41.1")
     compileOnly("io.papermc.paper:paper-api:${mcVersion}-R0.1-SNAPSHOT")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
