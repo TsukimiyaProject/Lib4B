@@ -1,16 +1,18 @@
 package mc.tsukimiya.lib4b.command
 
 import mc.tsukimiya.lib4b.command.exception.NotFoundPluginCommandException
+import org.bukkit.command.CommandExecutor
+import org.bukkit.command.TabExecutor
 import org.bukkit.plugin.java.JavaPlugin
 
-class CommandRegistrar(private val plugin: JavaPlugin) {
-    fun registerCommand(baseCommand: BaseCommand, vararg subCommand: BaseSubCommand) {
-        subCommand.forEach {
-            baseCommand.registerSubCommands(it)
+object CommandRegistrar {
+    fun registerCommands(plugin: JavaPlugin, commands: MutableMap<String, CommandExecutor>) {
+        commands.forEach { (name, executor) ->
+            val command = plugin.getCommand(name) ?: throw NotFoundPluginCommandException(name, plugin.name)
+            command.setExecutor(executor)
+            if (executor is TabExecutor) {
+                command.tabCompleter = executor
+            }
         }
-        val command = plugin.getCommand(baseCommand.name)
-            ?: throw NotFoundPluginCommandException(baseCommand.name, plugin.name)
-        command.setExecutor(baseCommand)
-        command.tabCompleter = baseCommand
     }
 }
