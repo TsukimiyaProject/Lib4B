@@ -17,6 +17,21 @@ object Validation {
     }
 
     /**
+     * Longか
+     *
+     * @param str
+     * @return
+     */
+    fun isLong(str: String): Boolean {
+        return try {
+            str.toLong()
+            true
+        } catch (e: NumberFormatException) {
+            false
+        }
+    }
+
+    /**
      * 自然数か(ULongによるチェック)
      *
      * @param str
