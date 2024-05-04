@@ -3,13 +3,15 @@ package mc.tsukimiya.lib4b.config
 import mc.tsukimiya.lib4b.config.exception.ConfigKeyNotFoundException
 import mc.tsukimiya.lib4b.config.exception.InvalidConfigValueException
 import org.bukkit.configuration.file.FileConfiguration
-import org.jetbrains.exposed.sql.Database
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 
 abstract class DatabaseConnector {
     fun connect(config: FileConfiguration) {
+        var url: String
+        var driver: String
+
         when (val type = config.getString("db-type")) {
             "sqlite" -> {
                 val folderName = config.getString("sqlite.folder") ?: throw ConfigKeyNotFoundException("sqlite.folder")
@@ -19,7 +21,9 @@ abstract class DatabaseConnector {
                     Files.createDirectories(Paths.get(file.parent))
                     Files.createFile(Paths.get(file.path))
                 }
-                Database.connect("jdbc:sqlite:${file.path}", "org.sqlite.JDBC")
+
+                url = "jdbc:sqlite:${file.path}"
+                driver = "org.sqlite.JDBC"
             }
 
             "mysql" -> {
@@ -30,14 +34,29 @@ abstract class DatabaseConnector {
                 val db = config.getString("mysql.database") ?: throw ConfigKeyNotFoundException("mysql.database")
                 val user = config.getString("mysql.user") ?: throw ConfigKeyNotFoundException("mysql.user")
                 val password = config.getString("mysql.password") ?: throw ConfigKeyNotFoundException("mysql.password")
-                Database.connect("jdbc:mysql://${address}:${port}/${db}", "com.mysql.jdbc.Driver", user, password)
+
+                url = "jdbc:mysql://${address}:${port}/${db}?user=${user}&password=${password}"
+                driver = "com.mysql.jdbc.Driver"
             }
 
             else -> throw InvalidConfigValueException("db-type", type ?: "")
         }
 
+        connectDatabase(url, driver)
+
         createSchema()
     }
 
+    /**
+     * Database.connect(url, driver)して
+     *
+     * @param url
+     * @param driver
+     */
+    abstract fun connectDatabase(url: String, driver: String)
+
+    /**
+     * スキーマ作成
+     */
     abstract fun createSchema()
 }
