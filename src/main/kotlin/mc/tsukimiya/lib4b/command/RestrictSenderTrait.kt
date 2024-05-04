@@ -1,6 +1,6 @@
 package mc.tsukimiya.lib4b.command
 
-import mc.tsukimiya.lib4b.Main
+import mc.tsukimiya.lib4b.Lib4B
 import org.bukkit.command.CommandSender
 import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.command.RemoteConsoleCommandSender
@@ -22,18 +22,20 @@ interface RestrictSenderTrait {
         when (sender) {
             is ConsoleCommandSender, is RemoteConsoleCommandSender -> {
                 if (isRestrictConsole()) {
-                    sender.sendMessage(Main.instance.formatter.formatMessage("command.restrict.console"))
+                    sender.sendMessage(Lib4B.instance.formatter.formatMessage("command.restrict.console"))
                     return false
                 }
                 return true
             }
+
             is Player -> {
                 if (isRestrictPlayer()) {
-                    sender.sendMessage(Main.instance.formatter.formatMessage("command.restrict.player"))
+                    sender.sendMessage(Lib4B.instance.formatter.formatMessage("command.restrict.player"))
                     return false
                 }
                 return true
             }
+
             else -> return true
         }
     }

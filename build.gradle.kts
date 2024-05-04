@@ -31,7 +31,7 @@ bukkit {
     version = getVersion().toString()
     description = "ライブラリ詰め合わせ"
     author = "deceitya"
-    main = "mc.tsukimiya.lib4b.Main"
+    main = "mc.tsukimiya.lib4b.Lib4B"
     apiVersion = mcVersion.substring(0, mcVersion.lastIndexOf("."))
     load = BukkitPluginDescription.PluginLoadOrder.POSTWORLD
 }
